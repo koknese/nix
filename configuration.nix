@@ -1,0 +1,167 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "nixos"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # for github backups
+  sed -i 's/^{$/{\n  programs.git.enable = true;/' /etc/nixos/configuration.nix
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Enable networking
+  networking.networkmanager.enable = true;
+
+  programs.steam.enable = true;
+
+  # Set your time zone.
+  time.timeZone = "Europe/Riga";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Bluetooth support
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
+  # Enable the Budgie Desktop environment.
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.windowManager.i3.extraPackages = with pkgs; [
+	rofi
+	polybar
+	i3lock
+	deadd-notification-center
+	kdePackages.spectacle
+	feh
+  ];
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "lv";
+    variant = "apostrophe";
+  };
+
+  # Enable CUPS to print documents.
+  services.printing.enable = false;
+
+  # Enable sound with pipewire.
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.defaultUserShell = pkgs.zsh;
+
+  users.users.dainis = {
+    isNormalUser = true;
+    description = "dainis";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+	kitty
+	htop
+	vesktop
+	noto-fonts
+	pfetch-rs
+	pavucontrol
+        kitty-themes
+	(builtins.getFlake "github:MarceColl/zen-browser-flake").packages.x86_64-linux.default
+	pywal16
+	tealdeer
+	thefuck
+	pywalfox-native
+	zoxide
+	git
+	ncdu
+
+	pamixer
+    ];
+  };
+
+  # Install firefox.
+  programs.firefox.enable = false;
+  programs.git.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+  programs.vim.enable = true;
+  programs.vim.defaultEditor = true;
+  
+  programs.zsh = {
+	enable = true;
+	syntaxHighlighting.enable = true;
+	autosuggestions.enable = true;
+  };
+
+  programs.bat.enable = true;
+
+  programs.bat.extraPackages = with pkgs.bat-extras; [
+	  batdiff
+	  batman
+	  prettybat
+  ];
+
+
+
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     wget
+     killall
+  ];
+
+  # Enable OpenGL
+  hardware.graphics = {
+    enable = true;
+  };
+
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
+  };
+
+}
