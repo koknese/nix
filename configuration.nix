@@ -44,7 +44,7 @@
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
-  # Enable the Budgie Desktop environment.
+  # Enable i3wm.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.windowManager.i3.enable = true;
   services.xserver.windowManager.i3.extraPackages = with pkgs; [
