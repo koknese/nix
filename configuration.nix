@@ -7,7 +7,9 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+	./hardware-configuration.nix
+      # Fonts
+	./modules/fonts.nix
     ];
 
   # Bootloader.
@@ -16,9 +18,6 @@
 
   networking.hostName = "muldakmens"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # for github backups
-  sed -i 's/^{$/{\n  programs.git.enable = true;/' /etc/nixos/configuration.nix
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -51,9 +50,9 @@
 	rofi
 	polybar
 	i3lock
-	deadd-notification-center
 	kdePackages.spectacle
 	feh
+	dunst
   ];
 
   # Configure keymap in X11
@@ -136,6 +135,7 @@
   ];
 
 
+  # Fonts
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
@@ -145,6 +145,7 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
      killall
+     python3
   ];
 
   # Enable OpenGL
