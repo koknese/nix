@@ -25,7 +25,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
+  programs.thunar.enable = true;
   programs.steam.enable = true;
 
   # Set your time zone.
@@ -65,7 +65,7 @@
   services.printing.enable = false;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -92,13 +92,10 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
 	kitty
-	htop
 	vesktop
 	noto-fonts
-	pfetch-rs
 	pavucontrol
         kitty-themes
-	(builtins.getFlake "github:MarceColl/zen-browser-flake").packages.x86_64-linux.default
 	pywal16
 	tealdeer
 	thefuck
@@ -106,8 +103,13 @@
 	zoxide
 	git
 	ncdu
-
 	pamixer
+	
+	amberol
+	lmms
+	(builtins.getFlake "github:MarceColl/zen-browser-flake").packages.x86_64-linux.default
+	bottles-unwrapped
+	qbittorrent-enhanced
     ];
   };
 
@@ -135,17 +137,16 @@
   ];
 
 
-  # Fonts
-
   boot.kernelPackages = pkgs.linuxPackages_zen;
-
+  services.tor.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-     killall
-     python3
+	wget
+     	killall
+     	python3
+	htop-vim
+	home-manager
   ];
 
   # Enable OpenGL
