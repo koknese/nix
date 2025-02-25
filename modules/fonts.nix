@@ -9,6 +9,11 @@
   	dina-font
     ];
 
-  fonts.packages = [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    fonts.packages = with pkgs; [
+	  nerd-fonts.anonymice
+	  nerd-fonts.lekton
+	  nerd-fonts.blex-mono
+	  nerd-fonts.symbols-only
+    ];
 }
 
