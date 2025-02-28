@@ -132,8 +132,7 @@
 	  prettybat
   ];
 
-
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
   services.tor.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
