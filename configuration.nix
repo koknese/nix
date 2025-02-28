@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -49,7 +49,7 @@
   services.xserver.windowManager.i3.extraPackages = with pkgs; [
 	rofi
 	polybar
-	i3lock
+	i3lock-fancy-rapid
 	kdePackages.spectacle
 	feh
 	dunst
@@ -103,8 +103,7 @@
 	pamixer
 	
 	amberol
-	lmms
-	(builtins.getFlake "github:MarceColl/zen-browser-flake").packages.x86_64-linux.default
+	inputs.zenbrowser.packages.x86_64-linux.beta
 	bottles-unwrapped
 	qbittorrent-enhanced
     ];
@@ -143,7 +142,10 @@
      	killall
      	python3
 	htop-vim
-	home-manager
+
+	# Flakes
+	#inputs.zig2nix.packages.x86_64-linux.default
+	#inputs.zenbrowser.packages.x86_64-linux.beta
   ];
 
   # Enable OpenGL
