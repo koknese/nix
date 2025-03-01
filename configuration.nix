@@ -103,9 +103,11 @@
 	pamixer
 	
 	amberol
-	inputs.zenbrowser.packages.x86_64-linux.beta
 	bottles-unwrapped
 	qbittorrent-enhanced
+
+	# Flakes
+	inputs.zenbrowser.packages.x86_64-linux.beta
     ];
   };
 
@@ -132,7 +134,7 @@
 	  prettybat
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   services.tor.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -143,8 +145,7 @@
 	htop-vim
 
 	# Flakes
-	#inputs.zig2nix.packages.x86_64-linux.default
-	#inputs.zenbrowser.packages.x86_64-linux.beta
+	inputs.zig2nix.packages.x86_64-linux.default
   ];
 
   # Enable OpenGL
