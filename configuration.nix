@@ -10,6 +10,8 @@
 	./hardware-configuration.nix
       # Fonts
 	./modules/fonts.nix
+	./modules/home.nix
+	inputs.home-manager.nixosModules.home-manager
     ];
 
   # Bootloader.
@@ -25,8 +27,16 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+	
   programs.thunar.enable = true;
   programs.steam.enable = true;
+  programs.kdeconnect.enable = true;
+
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = with pkgs; [
+	xdg-desktop-portal-gtk
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Riga";
@@ -88,31 +98,28 @@
     description = "dainis";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-	kitty
-	vesktop
-	noto-fonts
-	pavucontrol
+        kitty
+        vesktop
+        noto-fonts
+        pavucontrol
         kitty-themes
-	pywal16
-	tealdeer
-	thefuck
-	pywalfox-native
-	zoxide
-	git
-	ncdu
-	pamixer
-	
-	amberol
-	bottles-unwrapped
-	qbittorrent-enhanced
-
-	# Flakes
-	inputs.zenbrowser.packages.x86_64-linux.beta
+        pywal16
+        tealdeer
+        thefuck
+        pywalfox-native
+        zoxide
+        git
+        ncdu
+        pamixer
+        
+        amberol
+        bottles-unwrapped
+        unzip
+        
+        # Flakes
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = false;
   programs.git.enable = true;
 
   # Allow unfree packages
@@ -126,16 +133,7 @@
 	autosuggestions.enable = true;
   };
 
-  programs.bat.enable = true;
-
-  programs.bat.extraPackages = with pkgs.bat-extras; [
-	  batdiff
-	  batman
-	  prettybat
-  ];
-
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  services.tor.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -143,9 +141,9 @@
      	killall
      	python3
 	htop-vim
+	bun
 
 	# Flakes
-	inputs.zig2nix.packages.x86_64-linux.default
   ];
 
   # Enable OpenGL
