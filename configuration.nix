@@ -32,11 +32,11 @@
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
 
-  services.flatpak.enable = true;
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [
-	xdg-desktop-portal-gtk
-  ];
+  #services.flatpak.enable = true;
+  #xdg.portal.enable = true;
+  #xdg.portal.extraPortals = with pkgs; [
+  #      xdg-desktop-portal-gtk
+  #];
 
   # Set your time zone.
   time.timeZone = "Europe/Riga";
@@ -111,10 +111,12 @@
         git
         ncdu
         pamixer
+	lmms
         
-        amberol
-        bottles-unwrapped
+	vlc
         unzip
+	lutris
+	qbittorrent-enhanced
         
         # Flakes
     ];
@@ -130,7 +132,7 @@
   programs.zsh = {
 	enable = true;
 	syntaxHighlighting.enable = true;
-	autosuggestions.enable = true;
+	autosuggestions.enable = true;	
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -142,6 +144,7 @@
      	python3
 	htop-vim
 	bun
+	zsh-history-substring-search
 
 	# Flakes
   ];
