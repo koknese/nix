@@ -57,12 +57,12 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.windowManager.i3.enable = true;
   services.xserver.windowManager.i3.extraPackages = with pkgs; [
-	rofi
-	polybar
-	i3lock-fancy-rapid
-	kdePackages.spectacle
-	feh
-	dunst
+        rofi
+        polybar
+        i3lock-fancy-rapid
+        kdePackages.spectacle
+        feh
+        dunst
   ];
 
   # Configure keymap in X11
@@ -97,29 +97,6 @@
     isNormalUser = true;
     description = "dainis";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-        kitty
-        vesktop
-        noto-fonts
-        pavucontrol
-        kitty-themes
-        pywal16
-        tealdeer
-        thefuck
-        pywalfox-native
-        zoxide
-        git
-        ncdu
-        pamixer
-	lmms
-        
-	vlc
-        unzip
-	lutris
-	qbittorrent-enhanced
-        
-        # Flakes
-    ];
   };
 
   programs.git.enable = true;
