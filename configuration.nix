@@ -97,6 +97,10 @@
     isNormalUser = true;
     description = "dainis";
     extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      vlc
+      picom
+    ];
   };
 
   programs.git.enable = true;
@@ -109,7 +113,7 @@
   programs.zsh = {
 	enable = true;
 	syntaxHighlighting.enable = true;
-	autosuggestions.enable = true;	
+	autosuggestions.enable = true;
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -121,7 +125,7 @@
      	python3
 	htop-vim
 	bun
-	zsh-history-substring-search
+	nodejs
 
 	# Flakes
   ];

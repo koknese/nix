@@ -22,9 +22,34 @@
 	    };
   	  };
         };
+
 	programs.vscode = {
 	  enable = true;
 	  package = pkgs.vscodium.fhs;
+	};
+
+	programs.zsh = {
+	   enable = true;
+  	   enableCompletion = true;
+	   sessionVariables = {
+	      PROMPT = "[%~]> ";
+	      SUDO_EDITOR = "vim";
+	   };
+	   initExtra = ''
+	      (cat ~/.cache/wal/sequences &)
+	      source ~/.cache/wal/colors-tty.sh
+      	      eval $(thefuck --alias)
+	      eval "$(zoxide init zsh)"
+
+	      autoload -Uz compinit && compinit
+	      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+           '';
+  	   zplug = {
+  	     enable = true;
+  	     plugins = [
+		#
+  	     ];
+  	   };
 	};
 
 	programs.kitty = {
@@ -34,13 +59,16 @@
 	      name = "Lekton Nerd Font";
 	      size = 16;
 	   };
+	   settings = {
+	      window_padding_width = 12;
+	   };
 	};
 
 	home.packages = with pkgs; [
 	    vesktop
             noto-fonts
             pavucontrol
-            #pywal16
+            pywal16
             tealdeer
             thefuck
             pywalfox-native
@@ -48,11 +76,8 @@
             git
             ncdu
             pamixer
-	    lmms
             
-	    vlc
             unzip
-	    lutris
 	    qbittorrent-enhanced
 	];
 	xsession.windowManager.i3 = rec {
@@ -70,7 +95,7 @@
 	         };
 
 		 window.titlebar = false;
-		 defaultWorkspace = "workspace number 1";
+		 defaultWorkspace = "workspace number 0";
 		
 		fonts = {
 		  names = [ "AnonymicePro Nerd Font" ];
@@ -78,10 +103,11 @@
 		};
 		
 		startup = [
-		   { command = "nohup bash -c ''cd ~/Shells/Python && nix-shell --run ''source ~/venv/bin/activate && discordrp-mpris''' > output.log 2>&1 &"; }
 		   { command = "polybar"; }
+		   { command = "cd ~/Gits/vlc-rpc/ && start.sh"; }
 		   { command = "dunst"; }
-		   { command = "feh --bg-fill ~/Downloads/wallpaper.png"; }
+		   { command = "picom"; }
+		   { command = "feh --bg-center ~/Downloads/wallpaper.jpg"; }
 		 ];
 	       };
 	       extraConfig = "

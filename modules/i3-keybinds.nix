@@ -2,8 +2,11 @@ mod:
 {
   "${mod}+Return" = "exec kitty";
   "${mod}+d" = "exec rofi -show drun";
+  "${mod}+x" = "exec i3lock-fancy-rapid 5 4";
   "${mod}+Shift+Return" = "exec xterm";
   "${mod}+Shift+q" = "kill";
+  "${mod}+Shift+p" = "exec spectacle -c -f";
+  "${mod}+p" = "exec spectacle -c -r";
   "XF86AudioRaiseVolume" = "exec --no-startup-id pamixer -i 5";
   "XF86AudioLowerVolume" = "exec --no-startup-id pamixer -d 5";
   "XF86AudioMute" = "exec --no-startup-id pamixer -t";
