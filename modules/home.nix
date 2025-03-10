@@ -121,6 +121,22 @@
 		client.placeholder      $bg     $bg     $fg  $bg       $bg\n
 		
 		client.background       $bg\n
+
+		mode `resize` {\n
+        		bindsym j resize shrink width 10 px or 10 ppt\n
+        		bindsym k resize grow height 10 px or 10 ppt\n
+        		bindsym l resize shrink height 10 px or 10 ppt\n
+        		bindsym semicolon resize grow width 10 px or 10 ppt\n
+
+        		bindsym Left resize shrink width 10 px or 10 ppt\n
+        		bindsym Down resize grow height 10 px or 10 ppt\n
+        		bindsym Up resize shrink height 10 px or 10 ppt\n
+        		bindsym Right resize grow width 10 px or 10 ppt\n
+
+        		bindsym Return mode `default`\n
+        		bindsym Escape mode `default`\n
+        		bindsym $mod+r mode `default`\n
+		}
 	       ";
 	     };
    };

@@ -7,6 +7,7 @@ mod:
   "${mod}+Shift+q" = "kill";
   "${mod}+Shift+p" = "exec spectacle -c -f";
   "${mod}+p" = "exec spectacle -c -r";
+  "${mod}+r" = "mode ''resize''";
   "XF86AudioRaiseVolume" = "exec --no-startup-id pamixer -i 5";
   "XF86AudioLowerVolume" = "exec --no-startup-id pamixer -d 5";
   "XF86AudioMute" = "exec --no-startup-id pamixer -t";

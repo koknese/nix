@@ -17,6 +17,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.tmp.cleanOnBoot = true;
 
   networking.hostName = "muldakmens"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -100,6 +101,8 @@
     packages = with pkgs; [
       vlc
       picom
+      flac
+      clonehero
     ];
   };
 
