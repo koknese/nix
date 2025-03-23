@@ -66,7 +66,6 @@
 
 	home.packages = with pkgs; [
 	    vesktop
-            noto-fonts
             pavucontrol
             pywal16
             tealdeer
@@ -78,7 +77,6 @@
             pamixer
             
             unzip
-	    qbittorrent-enhanced
 	];
 	xsession.windowManager.i3 = rec {
 	       enable = true;
@@ -106,6 +104,7 @@
 		   { command = "polybar"; }
 		   { command = "cd ~/Gits/vlc-rpc/ && start.sh"; }
 		   { command = "dunst"; }
+		   { command = "nicotine"; }
 		   { command = "picom"; }
 		   { command = "feh --bg-center ~/Downloads/wallpaper.jpg"; }
 		 ];
@@ -139,5 +138,14 @@
 		}
 	       ";
 	     };
+	     programs = {
+    		direnv = {
+    		  enable = true;
+    		  enableBashIntegration = true; # see note on other shells below
+    		  nix-direnv.enable = true;
+    		};
+
+    		bash.enable = true; # see note on other shells below
+	};
    };
 }

@@ -31,8 +31,7 @@ mod:
   "${mod}+Shift+Up" = "move up";
   "${mod}+Shift+Right" = "move right";
   "${mod}+f" = "fullscreen";
-  "${mod}+Shift+f" = "floating toggle";
-  "${mod}+space" = "focus mode_toggle";
+  "${mod}+space" = "floating toggle";
   "${mod}+1" = "workspace 1";
   "${mod}+2" = "workspace 2";
   "${mod}+3" = "workspace 3";

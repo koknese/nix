@@ -17,7 +17,10 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.tmp.cleanOnBoot = true;
+
+  # Cleaning out bloat and freeing up space
+  boot.tmp.cleanOnBoot = true; # wipes /tmp on boot
+  services.journald.extraConfig = "SystemMaxUse=200M"; # Limits /var/log/journal to 200 MiB
 
   networking.hostName = "muldakmens"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -31,8 +34,6 @@
 	
   programs.thunar.enable = true;
   programs.steam.enable = true;
-  programs.kdeconnect.enable = true;
-
   #services.flatpak.enable = true;
   #xdg.portal.enable = true;
   #xdg.portal.extraPortals = with pkgs; [
@@ -94,15 +95,17 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = pkgs.zsh;
 
+  programs.adb.enable = true;
+
   users.users.dainis = {
     isNormalUser = true;
     description = "dainis";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
     packages = with pkgs; [
       vlc
       picom
-      flac
-      clonehero
+      nicotine-plus
+      keepassxc
     ];
   };
 
@@ -129,9 +132,11 @@
 	htop-vim
 	bun
 	nodejs
-
+	kdePackages.kdenlive
 	# Flakes
   ];
+  
+  home-manager.backupFileExtension = ".bak";
 
   # Enable OpenGL
   hardware.graphics = {
