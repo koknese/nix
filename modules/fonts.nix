@@ -14,6 +14,8 @@
 	  nerd-fonts.lekton
 	  nerd-fonts.blex-mono
 	  nerd-fonts.symbols-only
+	  league-gothic
+	  inter
     ];
 }
 

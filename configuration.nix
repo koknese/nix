@@ -56,16 +56,18 @@
   services.blueman.enable = true;
 
   # Enable i3wm.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.windowManager.i3.enable = true;
-  services.xserver.windowManager.i3.extraPackages = with pkgs; [
+  services.xserver = { 
+     displayManager.lightdm.enable = true;
+     windowManager.i3.enable = true;
+     windowManager.i3.extraPackages = with pkgs; [
         rofi
         polybar
         i3lock-fancy-rapid
         kdePackages.spectacle
         feh
         dunst
-  ];
+     ];
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -75,6 +77,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = false;
+  services.tor.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -106,6 +109,8 @@
       picom
       nicotine-plus
       keepassxc
+      obs-studio
+      tor-browser
     ];
   };
 
@@ -132,7 +137,7 @@
 	htop-vim
 	bun
 	nodejs
-	kdePackages.kdenlive
+	sqlite
 	# Flakes
   ];
   

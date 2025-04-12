@@ -77,6 +77,9 @@
             pamixer
             
             unzip
+   	    krita
+	    prismlauncher
+	ventoy
 	];
 	xsession.windowManager.i3 = rec {
 	       enable = true;
@@ -93,7 +96,7 @@
 	         };
 
 		 window.titlebar = false;
-		 defaultWorkspace = "workspace number 0";
+		 defaultWorkspace = "workspace number 1";
 		
 		fonts = {
 		  names = [ "AnonymicePro Nerd Font" ];
@@ -104,6 +107,7 @@
 		   { command = "polybar"; }
 		   { command = "cd ~/Gits/vlc-rpc/ && start.sh"; }
 		   { command = "dunst"; }
+		   { command = "keepassxc"; }
 		   { command = "nicotine"; }
 		   { command = "picom"; }
 		   { command = "feh --bg-center ~/Downloads/wallpaper.jpg"; }
